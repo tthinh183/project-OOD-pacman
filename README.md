@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <h1 align="center">
   <br>
   <a href=""><img src="https://i.pinimg.com/originals/b4/ee/c4/b4eec4d093adbe9d8a3cbb40d024836a.png" width="450"></a>
@@ -48,3 +49,6 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
   <a href=""><img src="https://res.cloudinary.com/dek4evg4t/image/upload/v1562055192/pac-man-logo-icon-512x512.png" width="50"></a>
   <br>
 </h1>
+=======
+# OODProject_Pacman_MVCModel
+>>>>>>> 3705db5f801ac7c2843dbe1c6ce57f2f9be7828f
