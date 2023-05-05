@@ -1,6 +1,6 @@
 package game;
 
-import game.entities.*; 
+import game.entities.*;  
 import game.entities.ghosts.Blinky;
 import game.entities.ghosts.Ghost;
 import game.ghostFactory.*;
