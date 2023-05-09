@@ -12,7 +12,8 @@ import game.Game;
 import game.Observer;
 import game.Sujet;
 
-
+//lớp Pacman đại diện pacman
+//kế thừa từ lớp cha MovingEntity và triển khai giao diện sujet
 public class Pacman extends MovingEntity implements Sujet {
     private CollisionDetector collisionDetector;
     private List<Observer> observerCollection;
@@ -22,7 +23,7 @@ public class Pacman extends MovingEntity implements Sujet {
         observerCollection = new ArrayList<>();
     }
 
-
+    //kiểm tra phím nhấn
     public void input(KeyHandler k) {
         int new_xSpd = 0;
         int new_ySpd = 0;

@@ -11,9 +11,12 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+//lớp Ghost đại diện cho ghost của trò chơi
+//kế thừa từ lớp cha MovingEntity
 public abstract class Ghost extends MovingEntity {
+	
+	//các trạng thái của ghost
     protected GhostState state;
-
     protected final GhostState chaseMode;
     protected final GhostState scatterMode;
     protected final GhostState frightenedMode;

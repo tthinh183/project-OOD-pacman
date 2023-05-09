@@ -29,30 +29,36 @@ public class Game implements Observer {
     public Game(){
         List<List<String>> data = null;
         try {
+        	//đọc tập tin csv
             data = new CsvReader().parseCsv(getClass().getClassLoader().getResource("resources/level/level.csv").toURI());
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-        int cellsPerRow = data.get(0).size();
-        int cellsPerColumn = data.size();
-        int cellSize = 8;
+        int cellsPerRow = data.get(0).size();//sl ô mỗi hàng
+        int cellsPerColumn = data.size();//sl ô mỗi cột
+        int cellSize = 8;//kích thước ô
 
-        CollisionDetector collisionDetector = new CollisionDetector(this);
+        CollisionDetector collisionDetector = new CollisionDetector(this);//xác định va chạm của các đối tượng trong game
         AbstractGhostFactory abstractGhostFactory = null;
 
         for(int xx = 0 ; xx < cellsPerRow ; xx++) {
             for(int yy = 0 ; yy < cellsPerColumn ; yy++) {
+            	//xx đại diện cho vị trí cột
+            	//yy đại diện cho vị trí hàng
                 String dataChar = data.get(yy).get(xx);
                 if (dataChar.equals("x")) {
+                	//nếu giá trị là x thì tạo 1 wall
                     objects.add(new Wall(xx * cellSize, yy * cellSize));
                 }else if (dataChar.equals("P")) {
+                	//nếu giá trị là p thì tạo 1 pacman
                     pacman = new Pacman(xx * cellSize, yy * cellSize);
                     pacman.setCollisionDetector(collisionDetector);
                     
                     pacman.registerObserver(GameLauncher.getUIPanel());
                     pacman.registerObserver(this);
-                }else if (dataChar.equals("b") || dataChar.equals("p") || dataChar.equals("i") || dataChar.equals("c")) { //Création des fantômes en utilisant les différentes factories
+                }else if (dataChar.equals("b") || dataChar.equals("p") || dataChar.equals("i") || dataChar.equals("c")) { //CrÃ©ation des fantÃ´mes en utilisant les diffÃ©rentes factories
                     switch (dataChar) {
+                    	//tạo đối tượng ghost tương ứng
                         case "b":
                             abstractGhostFactory = new BlinkyFactory();
                             break;
@@ -73,10 +79,13 @@ public class Game implements Observer {
                         blinky = (Blinky) ghost;
                     }
                 }else if (dataChar.equals(".")) {
+                	//tạo đối tượng pacgum
                     objects.add(new PacGum(xx * cellSize, yy * cellSize));
                 }else if (dataChar.equals("o")) {
+                	//tạo đối tượng super pacgum
                     objects.add(new SuperPacGum(xx * cellSize, yy * cellSize));
                 }else if (dataChar.equals("-")) {
+                	//tạo đối tượng ghosthouse
                     objects.add(new GhostHouse(xx * cellSize, yy * cellSize));
                 }
             }
@@ -130,6 +139,7 @@ public class Game implements Observer {
 
     @Override
     public void updateSuperPacGumEaten(SuperPacGum spg) {
+    	// phương thức sẽ xóa đối tượng SuperPacGum khỏi trò chơi và đặt trạng thái cho tất cả các Ghost là 'frightened'
         spg.destroy();
         for (Ghost gh : ghosts) {
             gh.getState().superPacGumEaten();
@@ -138,9 +148,13 @@ public class Game implements Observer {
 
     @Override
     public void updateGhostCollision(Ghost gh) {
+    	//nếu pacman va chạm với ghost
+    	//kiểm tra xem ghost là FrightenedMode hay là EatenMode
         if (gh.getState() instanceof FrightenedMode) {
+        	//thực hiện phương thức eaten()
             gh.getState().eaten();
         }else if (!(gh.getState() instanceof EatenMode)) {
+        	//trò chơi kết thúc
             System.out.println("Game over !\nScore : " + GameLauncher.getUIPanel().getScore());
             System.exit(0); //TODO
         }

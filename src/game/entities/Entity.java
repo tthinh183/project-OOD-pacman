@@ -7,7 +7,8 @@ public abstract class Entity {
     protected int size;
     protected int xPos;
     protected int yPos;
-
+    
+    //thực thể đã bị phá hủy hay chưa
     protected boolean destroyed = false;
 
     public Entity(int size, int xPos, int yPos) {
@@ -41,6 +42,6 @@ public abstract class Entity {
     public int getyPos() {
         return yPos;
     }
-
+    //trả về hình chữ nhật bao quanh thực thể, được sử dụng để xác định va chạm giữa các thực thể khác.
     public abstract Rectangle getHitbox();
 }

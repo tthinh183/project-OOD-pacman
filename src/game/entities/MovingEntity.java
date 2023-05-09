@@ -8,14 +8,17 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+//lớp MovingEntity đại diện cho sự di chuyển của các thực thể
+//kế thừa lớp cha Entity
 public abstract class MovingEntity extends Entity {
-    protected int spd;
+    protected int spd;//tốc độ của thực thể
+    // tốc độ di chuyển theo trục x và trục y
     protected int xSpd = 0;
     protected int ySpd = 0;
-    protected BufferedImage sprite;
-    protected float subimage = 0;
-    protected int nbSubimagesPerCycle;
-    protected int direction = 0;
+    protected BufferedImage sprite;// hình ảnh của thực thể	
+    protected float subimage = 0;//chỉ số hình ảnh của sprite được sử dụng để vẽ
+    protected int nbSubimagesPerCycle;//số lượng hình ảnh được sử dụng để tạo ra hoạt hình cho sprite
+    protected int direction = 0;//hướng di chuyển của thực thể
     protected float imageSpd = 0.2f;
 
     public MovingEntity(int size, int xPos, int yPos, int spd, String spriteName, int nbSubimagesPerCycle, float imageSpd) {
@@ -83,14 +86,15 @@ public abstract class MovingEntity extends Entity {
         g.drawImage(sprite.getSubimage((int)subimage * size + direction * size * nbSubimagesPerCycle, 0, size, size), this.xPos, this.yPos,null);
     }
 
-    
+    //kiểm tra xem thực thể có nằm trên lưới hay không
     public boolean onTheGrid() {
         return (xPos%8 == 0 && yPos%8 == 0);
     }
 
-    
+    // kiểm tra xem thực thể có nằm trong cửa sổ chơi hay không
     public boolean onGameplayWindow() { return !(xPos<=0 || xPos>= GameplayPanel.width || yPos<=0 || yPos>= GameplayPanel.height); }
-
+    
+    //lấy hitbox của thực thể để xử lý va chạm
     public Rectangle getHitbox() {
         return new Rectangle(xPos, yPos, size, size);
     }

@@ -10,6 +10,7 @@ import java.awt.*;
 
 
 public class UIPanel extends JPanel implements Observer {
+	//quản lí giao diện người dùng trò chơi
     public static int width;
     public static int height;
 

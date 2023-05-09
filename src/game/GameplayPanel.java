@@ -80,16 +80,16 @@ public class GameplayPanel extends JPanel implements Runnable {
     @Override
     public void run() {
         init();
-        final double GAME_HERTZ = 60.0;
-        final double TBU = 1000000000 / GAME_HERTZ;
+        final double GAME_HERTZ = 60.0;// tần số cập nhật trạng thái của game (tính bằng hertz).
+        final double TBU = 1000000000 / GAME_HERTZ;//thời gian giữa hai lần cập nhật trạng thái của game, tính bằng nano giây.
 
-        final int MUBR = 5; 
+        final int MUBR = 5; //số lần cập nhật tối đa cho phép trong một khoảng thời gian TBU
 
         double lastUpdateTime = System.nanoTime();
         double lastRenderTime;
 
-        final double TARGET_FPS = 60.0;
-        final double TTBR = 1000000000 / TARGET_FPS;
+        final double TARGET_FPS = 60.0;// tần số cập nhật màn hình (tính bằng hertz).
+        final double TTBR = 1000000000 / TARGET_FPS;//thời gian giữa hai lần hiển thị màn hình
 
         int frameCount = 0;
         int lastSecondTime = (int) (lastUpdateTime / 1000000000);

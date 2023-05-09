@@ -2,6 +2,8 @@ package game.entities;
 
 import java.awt.*;
 
+//lớp StaticEntity mô tả các đối tượng tĩnh(không chuyển động trong trò chơi)
+//kế thừa từ lớp cha Entity
 public abstract class StaticEntity extends Entity {
 
     protected Rectangle hitbox;

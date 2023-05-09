@@ -4,7 +4,7 @@ import game.entities.PacGum;
 import game.entities.SuperPacGum;
 import game.entities.ghosts.Ghost;
 
-
+//observer pattern
 public interface Observer {
     void updatePacGumEaten(PacGum pg);
     void updateSuperPacGumEaten(SuperPacGum spg);
